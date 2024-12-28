@@ -63,13 +63,27 @@ module.exports.loginUser = async (req, res, next) => {
   if (!isMatch) {
     return res.status(401).json({ message: "Invalid Email or Password " });
   }
+  //set token
   const token = user.generateAuthToken();
+  //set cookie
+  res.cookie("token", token);
   // Exclude password field
   const userObj = user.toObject();
   delete userObj.password;
-  
+
   res.status(200).json({
     token,
-    user:userObj,
+    user: userObj,
   });
 };
+
+module.exports.userProfile = (req, res, next) => {
+  res.status(200).json(req.user);
+};
+
+
+module.exports.logout = (req, res, next) => {
+    res.clearCookie("token");
+    res.status(200).json({ message: "Successfully logged out" });
+  };
+  
