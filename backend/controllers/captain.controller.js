@@ -75,3 +75,13 @@ module.exports.loginCaptain = async (req, res, next) => {
     res.status(500).json({ message: "Server error", error: error.message });
   }
 };
+
+module.exports.captainProfile = (req, res, next) => {
+  console.log(req?._id);
+  res.status(200).json(req.user);
+};
+
+module.exports.logout = (req, res, next) => {
+  res.clearCookie("token");
+  res.status(200).json({ message: "Successfully logged out" });
+};
