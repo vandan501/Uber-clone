@@ -55,12 +55,9 @@ function UserLogin() {
       <div className="flex flex-col ">
         <p className="mt-6">
           New Account?{" "}
-          <Link
-            to="/register"
-            className="text-blue-600 underline font-semibold"
-          >
+          <Link to="/signup" className="text-blue-600 underline font-semibold">
             {" "}
-            Sign Up
+            Create new Account
           </Link>
         </p>
         <Link

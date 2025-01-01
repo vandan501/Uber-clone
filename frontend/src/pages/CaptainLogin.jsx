@@ -4,10 +4,10 @@ import { Link } from "react-router-dom";
 function CaptainLogin() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [userData, setUserData] = useState("");
+  const [captainData, setcaptainData] = useState("");
   const submitHandler = (e) => {
     e.preventDefault;
-    setUserData({ email: email, password: password });
+    setcaptainData({ email: email, password: password });
     setEmail("");
     setPassword("");
   };
@@ -61,7 +61,7 @@ function CaptainLogin() {
             className="text-blue-600 underline font-semibold"
           >
             {" "}
-            Sign Up
+            Register as a Captain
           </Link>
         </p>
         <Link
