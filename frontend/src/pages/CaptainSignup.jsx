@@ -94,8 +94,8 @@ function CaptainSignup() {
           </Link>
         </p>
       </div>
-      <div class="max-w-full px-4 py-6">
-        <p class="text-sm text-gray-700 line-clamp-2">
+      <div className="max-w-full px-4 py-6">
+        <p className="text-sm text-gray-700 line-clamp-2">
           By accessing or using this website, you agree to comply with and be
           bound by the terms and conditions set forth in this Terms and Services
           agreement. Please read these terms carefully. If you do not agree with
