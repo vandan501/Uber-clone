@@ -8,6 +8,8 @@ import CaptainSignup from "./pages/CaptainSignup";
 
 import { userDataContext } from "./context/userContext";
 import Home from "./pages/Home";
+import UserProtectedWrapper from "./pages/UserProtectedWrapper";
+import UserLogout from "./pages/UserLogout";
 function App() {
   const ans = useContext(userDataContext);
   return (
@@ -18,7 +20,16 @@ function App() {
         <Route path="/signup" element={<UserSignup />} />
         <Route path="/captain-login" element={<CaptainLogin />} />
         <Route path="/captain-signup" element={<CaptainSignup />} />
-        <Route path="/home" element={<Home />} />
+        <Route path="/home" element={
+          <UserProtectedWrapper>
+          <Home />
+          </UserProtectedWrapper>
+          } />
+          <Route path="/user/logout" element={
+           <UserProtectedWrapper>
+           <UserLogout/>
+           </UserProtectedWrapper>
+            }/>
       </Routes>
     </div>
   );

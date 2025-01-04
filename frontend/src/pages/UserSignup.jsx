@@ -22,17 +22,19 @@ function UserSignup() {
     try {
       const response = await axios.post(
         `${import.meta.env.VITE_BASE_URL}/users/register`,
-        newUser
-      ,{
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      console.log("response",response)
+        newUser,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      console.log("response", response);
       if (response.status === 200 || 201) {
         const data = response.data;
-        console.log(data,"API Response")
+        console.log(data, "API Response");
         setUser(data.user);
+        localStorage.setItem("token", data.token);
         navigate("/home");
         setFirstname("");
         setLastname("");
@@ -101,7 +103,7 @@ function UserSignup() {
             }}
           />
           <button className="bg-black w-full text-white   text-xl mt-6 font-semibold px-5 py-3  block">
-          {isLoading ? "Registering..." : "Register"}
+            {isLoading ? "Registering..." : "Register"}
           </button>
         </form>
       </div>
