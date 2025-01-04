@@ -1,13 +1,29 @@
+import axios from "axios";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-
+import { useNavigate } from "react-router-dom";
+import { captainDataContext } from "../context/CaptainContext";
 function CaptainLogin() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [captainData, setcaptainData] = useState("");
-  const submitHandler = (e) => {
-    e.preventDefault;
-    setcaptainData({ email: email, password: password });
+  const { captain, setCaptain } = React.useContext(captainDataContext);
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+  const submitHandler = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    const captainData = { email: email, password: password };
+    const response = await axios.post(
+      `${import.meta.env.VITE_BASE_URL}/captains/login`,
+      captainData
+    );
+    if (response.status === 200) {
+      const data = response?.data;
+      setCaptain(data);
+      localStorage.setItem("token", data?.token);
+      setLoading(false);
+      navigate("/captain-home");
+    }
     setEmail("");
     setPassword("");
   };
@@ -20,12 +36,7 @@ function CaptainLogin() {
           alt="Uber logo"
           className="w-14 mb-7"
         />
-        <form
-          className="m-auto w-full"
-          onSubmit={(e) => {
-            submitHandler(e);
-          }}
-        >
+        <form className="m-auto w-full" onSubmit={submitHandler}>
           <h1 className="text-xl mb-2">What's Your Email?</h1>
           <input
             className="bg-[#eeeeee] mb-7 rounded px-4 py-2 border w-full  text-lg placeholder:text-base"
@@ -49,7 +60,7 @@ function CaptainLogin() {
             placeholder="password"
           />
           <button className="bg-black w-full text-white   text-xl mt-6 font-semibold px-5 py-3  block">
-            Login
+            {loading ? "Please wait" : "Login"}
           </button>
         </form>
       </div>
